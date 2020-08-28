@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.jbqneto.dojo.training.domain.Anime;
 
@@ -25,6 +27,15 @@ public class AnimeRepository {
 		return animes.stream()
 				.filter(anime -> anime.getId() == id)
 				.findFirst();
+	}
+	
+	public void delete(int id) {
+		Anime anime = animes.stream()
+			.filter(filteredAnime -> filteredAnime.getId() == id)
+			.findFirst()
+			.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anime Not found"));
+		
+		animes.remove(anime);
 	}
 	
 	public Anime save(Anime anime) {
