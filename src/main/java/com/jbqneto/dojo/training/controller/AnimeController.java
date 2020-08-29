@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.jbqneto.dojo.training.domain.Anime;
 import com.jbqneto.dojo.training.repository.AnimeRepository;
@@ -34,16 +34,20 @@ public class AnimeController {
 	
 	@GetMapping("/{animeId}")
 	public ResponseEntity<Anime> findById(@PathVariable int animeId) {
-		Anime anime = repository.findById(animeId)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anime not found."));
-		
+		Anime anime = repository.findById(animeId);
 		return ResponseEntity.ok(anime);
-	}
+	} 
 	
 	@DeleteMapping("/{animeId}")
 	public ResponseEntity<Void> delete(@PathVariable int animeId) {
 		repository.delete(animeId);
 		
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping
+	public ResponseEntity<Void> update(@RequestBody Anime anime) {
+		repository.update(anime);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	

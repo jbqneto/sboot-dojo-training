@@ -2,7 +2,6 @@ package com.jbqneto.dojo.training.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -23,10 +22,26 @@ public class AnimeRepository {
 		return animes;
 	}
 
-	public Optional<Anime> findById(int id) {
+	public Anime findById(int id) {
 		return animes.stream()
 				.filter(anime -> anime.getId() == id)
-				.findFirst();
+				.findFirst()
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Anime not found"));
+	}
+	
+	public Anime update(Anime anime) {
+		int pos = -1;
+		for (int i=0; i < animes.size(); i++) {
+			if (animes.get(i).getId() == anime.getId())
+				pos = i;
+		}
+		
+		if (pos == -1)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Anime not found");
+		
+		animes.set(pos, anime);
+		
+		return anime;
 	}
 	
 	public void delete(int id) {
