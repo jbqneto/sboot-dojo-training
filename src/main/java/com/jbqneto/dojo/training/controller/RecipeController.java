@@ -14,46 +14,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jbqneto.dojo.training.domain.Anime;
-import com.jbqneto.dojo.training.repository.AnimeRepository;
+import com.jbqneto.dojo.training.domain.Recipe;
+import com.jbqneto.dojo.training.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/api/animes")
-public class AnimeController {
+@RequestMapping(value = "/api/recipes")
+public class RecipeController {
 
-	private final AnimeRepository repository;
+	private final RecipeRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<Anime>> list() {
+	public ResponseEntity<List<Recipe>> list() {
 		return ResponseEntity.ok(repository.listAll());
 	}
 	
-	@GetMapping("/{animeId}")
-	public ResponseEntity<Anime> findById(@PathVariable int animeId) {
-		Anime anime = repository.findById(animeId);
-		return ResponseEntity.ok(anime);
+	@GetMapping("/{recipeId}")
+	public ResponseEntity<Recipe> findById(@PathVariable int recipeId) {
+		Recipe recipe = repository.findById(recipeId);
+		return ResponseEntity.ok(recipe);
 	} 
 	
-	@DeleteMapping("/{animeId}")
-	public ResponseEntity<Void> delete(@PathVariable int animeId) {
-		repository.delete(animeId);
+	@DeleteMapping("/{recipeId}")
+	public ResponseEntity<Void> delete(@PathVariable int recipeId) {
+		repository.delete(recipeId);
 		
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Void> update(@RequestBody Anime anime) {
-		repository.update(anime);
+	public ResponseEntity<Void> update(@RequestBody Recipe recipe) {
+		repository.update(recipe);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Anime> save(@RequestBody Anime anime) {
-		return new ResponseEntity<Anime>(repository.save(anime), HttpStatus.CREATED);
+	public ResponseEntity<Recipe> save(@RequestBody Recipe recipe) {
+		return new ResponseEntity<Recipe>(repository.save(recipe), HttpStatus.CREATED);
 	}
 	
 }
