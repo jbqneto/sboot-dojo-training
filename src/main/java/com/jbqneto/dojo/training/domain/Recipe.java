@@ -17,6 +17,6 @@ public class Recipe {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private final String name;
+	private String name;
 
 }

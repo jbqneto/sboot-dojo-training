@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jbqneto.dojo.training.domain.Recipe;
-import com.jbqneto.dojo.training.repository.RecipeRepository;
+import com.jbqneto.dojo.training.service.RecipeService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(value = "/api/recipes")
 public class RecipeController {
 
-	private final RecipeRepository repository;
+	private final RecipeService repository;
 	
 	@GetMapping
 	public ResponseEntity<List<Recipe>> list() {
