@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    container_name: sboot_mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: db_ADM83!
+    ports:
+      - "3307:3306"
+    volumes:
+      - training_data:/var/lib/mysql 
+
+volumes:
+  training_data:
