@@ -9,5 +9,6 @@ import com.jbqneto.dojo.training.domain.Recipe;
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 	
 	List<Recipe> findByName(String name);
+	List<Recipe> findByNameContaining(String name);
 	
 }

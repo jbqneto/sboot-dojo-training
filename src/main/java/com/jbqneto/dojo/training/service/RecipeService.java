@@ -1,20 +1,17 @@
 package com.jbqneto.dojo.training.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.stereotype.Service;
 
 import com.jbqneto.dojo.training.commons.RecipeUtils;
-import com.jbqneto.dojo.training.domain.Ingredient;
 import com.jbqneto.dojo.training.domain.Recipe;
 import com.jbqneto.dojo.training.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Service
 public class RecipeService {
 	
 	private final RecipeUtils recipeUtils;
@@ -28,10 +25,12 @@ public class RecipeService {
 		return recipeUtils.findRecipeOrThrowNotFound(id, repository);
 	}
 	
-	public Recipe update(Recipe recipe) {
-		Recipe recipeFound = findById(recipe.getId());
-		recipeFound.setName(recipe.getName());
-		return recipe;
+	public void update(Recipe recipe) {
+		repository.save(recipe);
+	}
+	
+	public List<Recipe> findByName(String name) {
+		return repository.findByNameContaining(name);
 	}
 	
 	public void delete(int id) {
