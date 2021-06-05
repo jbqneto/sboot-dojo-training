@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jbqneto.dojo.training.domain.Recipe;
-import com.jbqneto.dojo.training.service.RecipeService;
+import com.jbqneto.dojo.training.domain.model.Recipe;
+import com.jbqneto.dojo.training.domain.service.RecipeService;
 
 import lombok.RequiredArgsConstructor;
 

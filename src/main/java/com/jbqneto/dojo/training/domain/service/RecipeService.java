@@ -1,12 +1,12 @@
-package com.jbqneto.dojo.training.service;
+package com.jbqneto.dojo.training.domain.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.jbqneto.dojo.training.commons.RecipeUtils;
-import com.jbqneto.dojo.training.domain.Recipe;
-import com.jbqneto.dojo.training.repository.RecipeRepository;
+import com.jbqneto.dojo.training.common.RecipeUtils;
+import com.jbqneto.dojo.training.domain.model.Recipe;
+import com.jbqneto.dojo.training.repository.RecipeRepositoryImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class RecipeService {
 	
 	private final RecipeUtils recipeUtils;
-	private final RecipeRepository repository;
+	private final RecipeRepositoryImpl repository;
 	
 	public List<Recipe> listAll() {
 		return repository.findAll();
@@ -34,7 +34,7 @@ public class RecipeService {
 	}
 	
 	public void delete(int id) {
-		Recipe recipe = recipeUtils.findRecipeOrThrowNotFound(id, repository);
+		Recipe recipe = findById(id);
 		repository.delete(recipe);
 	}
 	

@@ -1,4 +1,4 @@
-package com.jbqneto.dojo.training.domain;
+package com.jbqneto.dojo.training.domain.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

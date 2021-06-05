@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.jbqneto.dojo.training.domain.Recipe;
+import com.jbqneto.dojo.training.domain.model.Recipe;
+import org.springframework.stereotype.Repository;
 
-public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
+@Repository
+public interface RecipeRepositoryImpl extends JpaRepository<Recipe, Integer> {
 	
 	List<Recipe> findByName(String name);
 	List<Recipe> findByNameContaining(String name);
