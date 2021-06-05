@@ -19,6 +19,4 @@ public class Recipe {
 	
 	private String name;
 
-	private String preparation;
-
 }
