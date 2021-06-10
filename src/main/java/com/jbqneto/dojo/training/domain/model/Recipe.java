@@ -1,22 +1,28 @@
 package com.jbqneto.dojo.training.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 @Entity
 public class Recipe {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	
 	private String name;
+
+	private long time;
+
+	@OneToMany(mappedBy = "recipe")
+	private List<Ingredient> items;
 
 }

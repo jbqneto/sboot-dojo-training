@@ -2,44 +2,46 @@ package com.jbqneto.dojo.training.domain.service;
 
 import java.util.List;
 
+import com.jbqneto.dojo.training.application.repository.RecipeRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.jbqneto.dojo.training.common.RecipeUtils;
 import com.jbqneto.dojo.training.domain.model.Recipe;
-import com.jbqneto.dojo.training.repository.RecipeRepositoryImpl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.server.ResponseStatusException;
 
 @RequiredArgsConstructor
 @Service
 public class RecipeService {
-	
-	private final RecipeUtils recipeUtils;
-	private final RecipeRepositoryImpl repository;
+
+	private final RecipeRepository recipeRepository;
 	
 	public List<Recipe> listAll() {
-		return repository.findAll();
+		return recipeRepository.findAll();
 	}
 
-	public Recipe findById(int id) {
-		return recipeUtils.findRecipeOrThrowNotFound(id, repository);
+	public Recipe findById(long id) {
+		return recipeRepository
+				.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found"));
 	}
 	
 	public void update(Recipe recipe) {
-		repository.save(recipe);
+		recipeRepository.save(recipe);
 	}
 	
 	public List<Recipe> findByName(String name) {
-		return repository.findByNameContaining(name);
+		return recipeRepository.findByNameContaining(name);
 	}
 	
-	public void delete(int id) {
+	public void delete(long id) {
 		Recipe recipe = findById(id);
-		repository.delete(recipe);
+		recipeRepository.delete(recipe);
 	}
 	
 	public Recipe save(Recipe recipe) {
-		return repository.save(recipe);
+		return recipeRepository.save(recipe);
 	}
 
 }

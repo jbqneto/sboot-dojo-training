@@ -1,4 +1,4 @@
-package com.jbqneto.dojo.training.repository;
+package com.jbqneto.dojo.training.application.repository;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.jbqneto.dojo.training.domain.model.Recipe;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecipeRepositoryImpl extends JpaRepository<Recipe, Integer> {
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 	
 	List<Recipe> findByName(String name);
 	List<Recipe> findByNameContaining(String name);
